@@ -1,6 +1,8 @@
 # sheath
 
-> Webapp Editor for Ranvier Codebase MUDs
+> Webapp Dashboard & Editor for Ranvier Codebase MUDs
+
+> Build with VueJS 2
 
 ## Build Setup
 
