@@ -1,24 +1,22 @@
 <template>
   <div class="hello">
-    <h1>Sheath</h1>
-    <h2>Ranvier Dashboard</h2>
+    <h1>Items</h1>
+    <h2>Click an Item to see details</h2>
     <ul>
-      <li>Players</li>
-      <li><router-link to="/items">Items</router-link></li>
-      <li>Help</li>
+      <li v-for="item in items">
+        <router-link v-bind:to="'/items/' + item.uid"></router-link>
+      </li>
     </ul>
     <button @click="fetch">Fetch</button>
   </div>
 </template>
 
 <script>
-// TODO: Fetch Api stuff on load if it isn't in the store. Set up polling to fetch every so often.
-// TODO: Show loading screen during fetch.
-// TODO: Nav bar component.
+
 export default {
-  name: 'splash',
+  name: 'items',
   data () {
-    return {}
+    return { items: this.$store.state.items }
   },
   methods: {
     fetch () {

@@ -6,7 +6,6 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   state: {
     fetched: false,
-    fetching: false,
     helpfiles: [],
     players: [],
     areas: [], // TODO: Glom together areas based on rooms etc.
@@ -15,13 +14,14 @@ const store = new Vuex.Store({
     entities: []
   },
   mutations: {
-    setWorldData (state, { helps, players, areas, rooms, items, entities }) {
-      console.log(helps, areas, entities, players, items, rooms)
+    setWorldData (state, { helps, players, rooms, items, entities }) {
+      console.log(helps, entities, players, items, rooms)
       state.helpfiles = helps
       state.players = players
       state.rooms = rooms
       state.items = items
       state.entities = entities
+      state.fetched = true
     }
   },
   actions: {
