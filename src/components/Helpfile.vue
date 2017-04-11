@@ -1,73 +1,42 @@
 <template>
-  <div class="item-detail">
-    <h1>{{ itemDefinition.name }}</h1>
-    <h2>{{ removeAngles(itemDefinition.description) }}</h2>
-    <p>Area: {{ itemDefinition.area.title }}</p>
-    <p>Quality: {{ itemDefinition.quality }}</p>
-    <p>Type: {{ itemType }}</p>
-    <p v-if="itemProperties.length">Properties:</p>
-    <ul v-if="itemProperties.length">
-      <li v-for="property in itemProperties">{{property[0]}}: {{property[1]}} </li>
+  <div class="help-detail">
+    <h1>{{ helpDefinition.name }}</h1>
+    <h2 class="help-body">{{ removeAngles(helpDefinition.body) }}</h2>
+    <p v-if="helpDefinition.command">command: {{ helpDefinition.command }}</p>
+    <p>bundle: {{ bundle }}</p>
+    <p v-if="related.length">Related:</p>
+    <ul v-if="related.length">
+      <li v-for="helpTopic in related">{{ helpTopic }}</li>
     </ul>
-    <ul v-if="itemBehaviors.length">
-      <li v-for="behavior in itemBehaviors">{{behavior[0]}}: {{behavior[1]}} </li>
-    </ul>
-    <p>JSON: {{ itemDefinition }}</p>
-
+    <p>JSON: {{ helpDefinition }}</p>
   </div>
 </template>
 
 <script>
 
 export default {
-  name: 'item',
+  name: 'helpfile',
 
   data () {
     return {}
   },
 
   methods: {
-
     removeAngles (string) {
       return string.replace(/(<([^>]+)>)/ig, '').replace(/[<>]/g, '')
     }
-
   },
 
   computed: {
-    itemDefinition () {
-      return this.$store.state.items.find(item => item.entityReference === this.entityReference)
+    helpDefinition () {
+      return this.$store.state.helpfiles.find(help => help.name === this.filename && help.bundle === this.bundle)
     },
 
-    itemType () {
-      const item = this.itemDefinition
-      const properties = item.properties || {}
-      const stats = properties && properties.stats || {}
-      switch (true) {
-        case (Reflect.has(stats, 'armor')):
-          return 'Armor'
-        case (Reflect.has(properties, 'maxDamage')):
-          return 'Weapon'
-        case !!item.inventory:
-          return 'Container'
-        case (item.keywords.includes('resource')):
-          return 'Crafting Resource'
-        case (item.keywords.includes('potion')):
-          return 'Potion'
-        default:
-          return 'Unknown'
-      }
-    },
-
-    itemProperties () {
-      return Object.entries(this.itemDefinition.properties)
-    },
-
-    itemBehaviors () {
-      return Object.entries(this.itemDefinition.behaviors)
+    related () { // TODO: Do some voodoo to make these linkable by getting the bundle and such.
+      return this.helpDefinition.related
     }
   },
-  props: ['entityReference']
+  props: ['bundle', 'filename']
 }
 </script>
 

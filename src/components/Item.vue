@@ -27,7 +27,6 @@ export default {
   },
 
   methods: {
-
     removeAngles (string) {
       return string.replace(/(<([^>]+)>)/ig, '').replace(/[<>]/g, '')
     }

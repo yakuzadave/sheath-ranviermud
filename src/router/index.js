@@ -6,6 +6,7 @@ import Splash from '@/components/Splash'
 import Items from '@/components/Items'
 import Item from '@/components/Item'
 import Helpfiles from '@/components/Helpfiles'
+import Helpfile from '@/components/Helpfile'
 
 Vue.use(Router)
 
@@ -31,6 +32,12 @@ export default new Router({
       path: '/helpfiles',
       name: 'Helpfiles',
       component: Helpfiles
+    },
+    {
+      path: '/helpfiles/:bundle/:filename',
+      name: 'Helpfile',
+      component: Helpfile,
+      props: true
     }
   ]
 })

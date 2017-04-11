@@ -13,6 +13,7 @@
 <script>
 export default {
   name: 'items',
+
   data () {
     return { items: this.$store.state.items }
   }
