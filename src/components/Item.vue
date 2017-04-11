@@ -9,6 +9,9 @@
     <ul v-if="itemProperties.length">
       <p v-for="property in itemProperties">{{property[0]}}: {{property[1]}} </p>
     </ul>
+    <ul v-if="itemBehaviors.length">
+      <p v-for="behavior in itemBehaviors">{{behavior[0]}}: {{behavior[1]}} </p>
+    </ul>
     <p>JSON: {{ itemDefinition }}</p>
 
   </div>
@@ -36,7 +39,7 @@ export default {
 
   computed: {
     itemDefinition () {
-      return this.$store.state.items.find(item => item.id === Number(this.uid))
+      return this.$store.state.items.find(item => item.id === Number(this.uid) && item.area.name === this.area)
     },
 
     itemType () {
@@ -45,9 +48,13 @@ export default {
 
     itemProperties () {
       return Object.entries(this.itemDefinition.properties)
+    },
+
+    itemBehaviors () {
+      return Object.entries(this.itemDefinition.behaviors)
     }
   },
-  props: ['uid']
+  props: ['area', 'uid']
 }
 </script>
 

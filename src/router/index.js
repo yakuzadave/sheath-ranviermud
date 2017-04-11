@@ -20,7 +20,7 @@ export default new Router({
       component: Items
     },
     {
-      path: '/items/:uid',
+      path: '/items/:area/:uid',
       name: 'Item',
       component: Item,
       props: true
