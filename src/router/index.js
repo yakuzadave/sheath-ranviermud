@@ -20,7 +20,7 @@ export default new Router({
       component: Items
     },
     {
-      path: '/items/:area/:uid',
+      path: '/items/:entityReference',
       name: 'Item',
       component: Item,
       props: true

@@ -7,10 +7,10 @@
     <p>Type: {{ itemType }}</p>
     <p v-if="itemProperties.length">Properties:</p>
     <ul v-if="itemProperties.length">
-      <p v-for="property in itemProperties">{{property[0]}}: {{property[1]}} </p>
+      <li v-for="property in itemProperties">{{property[0]}}: {{property[1]}} </li>
     </ul>
     <ul v-if="itemBehaviors.length">
-      <p v-for="behavior in itemBehaviors">{{behavior[0]}}: {{behavior[1]}} </p>
+      <li v-for="behavior in itemBehaviors">{{behavior[0]}}: {{behavior[1]}} </li>
     </ul>
     <p>JSON: {{ itemDefinition }}</p>
 
@@ -39,11 +39,27 @@ export default {
 
   computed: {
     itemDefinition () {
-      return this.$store.state.items.find(item => item.id === Number(this.uid) && item.area.name === this.area)
+      return this.$store.state.items.find(item => item.entityReference === this.entityReference)
     },
 
     itemType () {
-      return this.itemDefinition.type || 'Unknown'
+      const item = this.itemDefinition
+      const properties = item.properties || {}
+      const stats = properties && properties.stats || {}
+      switch (true) {
+        case (Reflect.has(stats, 'armor')):
+          return 'Armor'
+        case (Reflect.has(properties, 'maxDamage')):
+          return 'Weapon'
+        case !!item.inventory:
+          return 'Container'
+        case (item.keywords.includes('resource')):
+          return 'Crafting Resource'
+        case (item.keywords.includes('potion')):
+          return 'Potion'
+        default:
+          return 'Unknown'
+      }
     },
 
     itemProperties () {
@@ -54,7 +70,7 @@ export default {
       return Object.entries(this.itemDefinition.behaviors)
     }
   },
-  props: ['area', 'uid']
+  props: ['entityReference']
 }
 </script>
 
@@ -62,6 +78,16 @@ export default {
 <style scoped>
 h1, h2 {
   font-weight: normal;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  display: inline-block;
+  margin: 0 10px;
 }
 
 a {

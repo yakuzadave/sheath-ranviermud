@@ -4,7 +4,7 @@
     <h2>Click an Item to see details</h2>
     <ul>
       <li v-for="item in items">
-        <router-link v-bind:to="`/items/${item.area.name}/${item.id}`">{{ item.name }}</router-link>
+        <router-link v-bind:to="`/items/${item.entityReference}`">{{ item.name }}</router-link>
       </li>
     </ul>
   </div>
