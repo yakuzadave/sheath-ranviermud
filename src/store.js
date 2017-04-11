@@ -15,7 +15,6 @@ const store = new Vuex.Store({
   },
   mutations: {
     setWorldData (state, { helps, players, rooms, items, entities }) {
-      console.log(helps, entities, players, items, rooms)
       state.helpfiles = helps
       state.players = players
       state.rooms = rooms

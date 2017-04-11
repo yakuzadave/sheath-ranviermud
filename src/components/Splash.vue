@@ -5,7 +5,7 @@
     <ul>
       <li>Players</li>
       <li><router-link to="/items">Items</router-link></li>
-      <li>Help</li>
+      <li><router-link to="/helpfiles">Help</router-link></li>
     </ul>
     <button @click="fetch">Fetch</button>
   </div>
@@ -17,13 +17,21 @@
 // TODO: Nav bar component.
 export default {
   name: 'splash',
+
   data () {
     return {}
   },
+
   methods: {
     fetch () {
       this.$store.dispatch('fetchAll')
+      console.log(this.$store.state)
     }
+  },
+
+  mounted () {
+    this.fetch()
+    console.log('Fetched.')
   }
 }
 </script>

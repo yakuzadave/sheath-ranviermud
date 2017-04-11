@@ -15,11 +15,6 @@ export default {
   name: 'items',
   data () {
     return { items: this.$store.state.items }
-  },
-  methods: {
-    fetch () {
-      this.$store.dispatch('fetchAll')
-    }
   }
 }
 </script>

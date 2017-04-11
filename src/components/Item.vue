@@ -20,7 +20,7 @@
 <script>
 
 export default {
-  name: 'items',
+  name: 'item',
 
   data () {
     return {}
