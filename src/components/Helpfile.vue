@@ -1,7 +1,7 @@
 <template>
   <div class="help-detail">
     <h1>{{ helpDefinition.name }}</h1>
-    <h2 class="help-body">{{ removeAngles(helpDefinition.body) }}</h2>
+    <p class="help-body">{{ removeAngles(helpDefinition.body) }}</p>
     <p v-if="helpDefinition.command">command: {{ helpDefinition.command }}</p>
     <p>bundle: {{ bundle }}</p>
     <p v-if="related.length">Related:</p>
@@ -54,6 +54,12 @@ ul {
 li {
   display: inline-block;
   margin: 0 10px;
+}
+
+.help-body {
+  text-align: left;
+  margin-left: 10%;
+  margin-right: 10%;
 }
 
 a {
