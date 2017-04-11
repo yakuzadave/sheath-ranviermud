@@ -4,7 +4,7 @@
     <h2>Click a Topic to see details</h2>
     <ul>
       <li v-for="help in helpfiles">
-        <p>{{ help.name }}</p>
+        <router-link v-bind:to="`/helpfiles/${help.bundle}/${help.name}`">{{ help.name }}</router-link>
       </li>
     </ul>
   </div>
@@ -15,14 +15,9 @@ export default {
   name: 'helpfiles',
 
   data () {
-    console.log(this.$store.state.helpfiles)
     return { helpfiles: this.$store.state.helpfiles }
-  },
-
-  mounted () {
-    console.log('Help Component Mounted.')
-    console.log(this.$store.state.helpfiles)
   }
+
 }
 </script>
 

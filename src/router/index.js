@@ -30,7 +30,7 @@ export default new Router({
     {
       path: '/helpfiles',
       name: 'Helpfiles',
-      compontent: Helpfiles
+      component: Helpfiles
     }
   ]
 })
