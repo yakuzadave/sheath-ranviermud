@@ -1,13 +1,16 @@
 <template>
-  <div class="hello">
-    <h1>Items</h1>
-    <h2>Click an Item to see details</h2>
-    <ul>
-      <li v-for="item in items">
-        {{ item.name }}
-      </li>
+  <div class="item-detail">
+    <h1>{{ itemDefinition.name }}</h1>
+    <h2>{{ removeAngles(itemDefinition.description) }}</h2>
+    <p>Area: {{ itemDefinition.area.title }}</p>
+    <p>Quality: {{ itemDefinition.quality }}</p>
+    <p>Type: {{ itemType }}</p>
+    <p v-if="itemProperties.length">Properties:</p>
+    <ul v-if="itemProperties.length">
+      <p v-for="property in itemProperties">{{property[0]}}: {{property[1]}} </p>
     </ul>
-    <button @click="fetch">Fetch</button>
+    <p>JSON: {{ itemDefinition }}</p>
+
   </div>
 </template>
 
@@ -15,15 +18,36 @@
 
 export default {
   name: 'items',
+
   data () {
-    return { items: this.$store.state.items }
+    return {}
   },
+
   methods: {
     fetch () {
       this.$store.dispatch('fetchAll')
+    },
+
+    removeAngles (string) {
+      return string.replace(/(<([^>]+)>)/ig, '').replace(/[<>]/g, '')
+    }
+
+  },
+
+  computed: {
+    itemDefinition () {
+      return this.$store.state.items.find(item => item.id === Number(this.uid))
+    },
+
+    itemType () {
+      return this.itemDefinition.type || 'Unknown'
+    },
+
+    itemProperties () {
+      return Object.entries(this.itemDefinition.properties)
     }
   },
-  props: ['item', 'id']
+  props: ['uid']
 }
 </script>
 
@@ -31,16 +55,6 @@ export default {
 <style scoped>
 h1, h2 {
   font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
 }
 
 a {

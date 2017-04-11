@@ -1,18 +1,16 @@
 <template>
-  <div class="hello">
+  <div class="items">
     <h1>Items</h1>
     <h2>Click an Item to see details</h2>
     <ul>
       <li v-for="item in items">
-        <router-link v-bind:to="'/items/' + item.uid"></router-link>
+        <router-link v-bind:to="'/items/' + item.id">{{ item.name }}</router-link>
       </li>
     </ul>
-    <button @click="fetch">Fetch</button>
   </div>
 </template>
 
 <script>
-
 export default {
   name: 'items',
   data () {
