@@ -11,7 +11,8 @@ const store = new Vuex.Store({
     areas: [], // TODO: Glom together areas based on rooms etc.
     rooms: [],
     items: [],
-    entities: []
+    entities: [],
+    error: ''
   },
   mutations: {
     setWorldData (state, { helps, players, rooms, items, entities }) {
@@ -21,6 +22,12 @@ const store = new Vuex.Store({
       state.items = items
       state.entities = entities
       state.fetched = true
+    },
+    setError (state, errorMessage) {
+      const error = {
+        'Failed to fetch': 'Failed to fetch world data. Are you sure that your Ranvier server is running, and that Sheath is pointing to the correct URL?'
+      }[errorMessage]
+      state.error = error
     }
   },
   actions: {
@@ -31,6 +38,7 @@ const store = new Vuex.Store({
       Promise.all(fetchers)
              .then(responses => responses.reduce(accumulateWorldData, {}))
              .then(worldData => commit('setWorldData', worldData))
+             .catch(error => commit('setError', error.message))
 
       function accumulateWorldData (worldData, response) {
         return Object.assign({}, worldData, response)

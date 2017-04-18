@@ -7,6 +7,7 @@
       <li><router-link to="/items">Items</router-link></li>
       <li><router-link to="/helpfiles">Help</router-link></li>
     </ul>
+    <h2 v-if="error">{{error}}</h2>
     <button @click="fetch">Fetch</button>
   </div>
 </template>
@@ -19,13 +20,19 @@ export default {
   name: 'splash',
 
   data () {
-    return {}
+    return { }
   },
 
   methods: {
     fetch () {
       this.$store.dispatch('fetchAll')
       console.log(this.$store.state)
+    }
+  },
+
+  computed: {
+    error () {
+      return this.$store.state.error || ''
     }
   },
 
