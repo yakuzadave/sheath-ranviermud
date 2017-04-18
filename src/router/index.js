@@ -8,6 +8,7 @@ import Item from '@/components/Item'
 import Helpfiles from '@/components/Helpfiles'
 import Helpfile from '@/components/Helpfile'
 import Players from '@/components/Players'
+import Player from '@/components/Player'
 
 Vue.use(Router)
 
@@ -44,6 +45,12 @@ export default new Router({
       path: '/players',
       name: 'Players',
       component: Players
+    },
+    {
+      path: '/players/:playerName',
+      name: 'Player',
+      component: Player,
+      props: true
     }
   ]
 })
