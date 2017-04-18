@@ -2,7 +2,7 @@
   <div class="player-detail">
     <h1>{{ playerName }}</h1>
     <p>Level: {{playerDefinition.level}}</p>
-
+    <p>Account: {{playerDefinition.account}}</p>
     <p v-if="baseAttributes.length">Base Attributes:</p>
     <ul v-if="baseAttributes.length">
       <li v-for="attr in baseAttributes">{{attr[0]}}: {{attr[1].base}} </li>
@@ -14,6 +14,14 @@
     <p v-if="playerEffects.length">Current Effects:</p>
     <ul v-if="playerEffects.length">
       <li v-for="eff in playerEffects">{{getEffectName(eff)}}: {{getEffectDuration(eff)}} </li>
+    </ul>
+    <p v-if="playerInventory.length">Inventory:</p>
+    <ul v-if="playerInventory.length">
+      <li v-for="item in playerInventory">{{item}}</li>
+    </ul>
+    <p v-if="playerEquipment.length">Equipment:</p>
+    <ul v-if="playerEquipment.length">
+      <li v-for="slot in playerEquipment">{{slot[0]}}: <router-link v-bind:to="`/items/${slot[1].entityReference}`">{{getItemNameByRef(slot[1])}}</router-link></li>
     </ul>
     <p>JSON: {{ playerDefinition }}</p>
   </div>
@@ -32,8 +40,14 @@ export default {
     getEffectName (eff) {
       return eff.config.name
     },
+
     getEffectDuration (eff) {
       return eff.config.duration === 'inf' ? 'Permanent' : eff.config.duration
+    },
+
+    getItemNameByRef (itemDef) {
+      console.log(itemDef)
+      return this.$store.state.items.find(item => item.entityReference === itemDef.entityReference).name
     }
   },
 
@@ -56,6 +70,14 @@ export default {
 
     playerEffects () {
       return this.playerDefinition.effects
+    },
+
+    playerInventory () {
+      return this.playerDefinition.inventory || [{name: 'Nothing'}]
+    },
+
+    playerEquipment () {
+      return Object.entries(this.playerDefinition.equipment)
     }
   },
 

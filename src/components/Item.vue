@@ -2,7 +2,7 @@
   <div class="item-detail">
     <h1>{{ itemDefinition.name }}</h1>
     <h2>{{ removeAngles(itemDefinition.description) }}</h2>
-    <p>Area: {{ itemDefinition.area.title }}</p>
+    <p>Area: {{ itemDefinition.area ? itemDefinition.area.title : 'Unknown' }}</p>
     <p>Quality: {{ itemDefinition.quality }}</p>
     <p>Type: {{ itemType }}</p>
     <p v-if="itemProperties.length">Properties:</p>
