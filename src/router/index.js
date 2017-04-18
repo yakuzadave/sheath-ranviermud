@@ -7,6 +7,7 @@ import Items from '@/components/Items'
 import Item from '@/components/Item'
 import Helpfiles from '@/components/Helpfiles'
 import Helpfile from '@/components/Helpfile'
+import Players from '@/components/Players'
 
 Vue.use(Router)
 
@@ -38,6 +39,11 @@ export default new Router({
       name: 'Helpfile',
       component: Helpfile,
       props: true
+    },
+    {
+      path: '/players',
+      name: 'Players',
+      component: Players
     }
   ]
 })

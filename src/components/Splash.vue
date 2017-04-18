@@ -3,7 +3,7 @@
     <h1>Sheath</h1>
     <h2>Ranvier Dashboard</h2>
     <ul>
-      <li>Players</li>
+      <li><router-link to="/players">Players</router-link></li>
       <li><router-link to="/items">Items</router-link></li>
       <li><router-link to="/helpfiles">Help</router-link></li>
     </ul>
