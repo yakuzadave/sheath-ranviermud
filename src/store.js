@@ -22,7 +22,9 @@ const store = new Vuex.Store({
       state.items = items
       state.entities = entities
       state.fetched = true
+      state.error = ''
     },
+
     setError (state, errorMessage) {
       const error = {
         'Failed to fetch': 'Failed to fetch world data. Are you sure that your Ranvier server is running, and that Sheath is pointing to the correct URL?'
