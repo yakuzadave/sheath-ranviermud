@@ -1,5 +1,9 @@
 # sheath
 
+DEPRECATED.
+Please use [soma](https://github.com/shawncplus/soma) as a GUI editor for Ranvier MUDs.
+Eventually this will be re-imagined as a web dashboard for monitoring your Ranvier server.
+
 > Webapp Dashboard & Editor for Ranvier Codebase MUDs
 
 > Build with VueJS 2
